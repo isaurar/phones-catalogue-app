@@ -16,5 +16,5 @@ module.exports = app => app.get('/api/phones', function(request, response) {
               limit: parseInt(limit, 10),
               total: totalRecords
        }
-      }), 2000);
+      }), 1000);
  });

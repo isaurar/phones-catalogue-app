@@ -1,6 +1,6 @@
 module.exports = {
     "phones": [
-        {"id":'1',"title":"phone 1","description":"phone 1 description", "color": "blue", "price":100, 'image': ''},
+        {"id":'1',"title":"phone 1","description":"phone 1 description", "color": "blue", "price":100, 'image': 'https://d1eh9yux7w8iql.cloudfront.net/product_images/product_images/254441_68ac7acd-9667-41fc-b6b1-1a7e82935558-thumb.jpg'},
         {"id":'2',"title":"phone 2","description":"phone 2 description.", "color": "black", "price":200, 'image': ''},
         {"id":'3',"title":"phone 3","description":"phone 3 description.","color": "white", "price":300, 'image': ''},
         {"id":'4',"title":"phone 4","description":"phone 4 description","color": "black", "price":400, 'image': ''},

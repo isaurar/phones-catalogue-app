@@ -40,16 +40,7 @@ const error = (state = initialState.error, {type, payload}) => {
 const data = (state = initialState.data, {type, payload}) => {
     switch(type) {
         case FETCH_SUCCEEDED:
-            return payload.data;
-        default:
-            return state;
-    }
-};
-
-const metadata = (state = initialState.metadata, {type, payload}) => {
-    switch(type) {
-        case FETCH_SUCCEEDED:
-            return payload.metadata;
+            return payload;
         default:
             return state;
     }
@@ -58,6 +49,5 @@ const metadata = (state = initialState.metadata, {type, payload}) => {
 export default combineReducers({
     isFetching,
     error,
-    data,
-    metadata
+    data
 });

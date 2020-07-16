@@ -1,3 +1,6 @@
+import axios from 'axios';
+import {getPhoneUrl} from '../../utils/urlUtils.js';
+
 import {
     FETCH_ATTEMPTED,
     FETCH_SUCCEEDED,
@@ -13,14 +16,17 @@ const fetchPhonesSuccess = payload => ({
     payload
 });
 
-const fetchPhonesFailed = payload => ({
+const fetchPhonesFail = payload => ({
     type: FETCH_FAILED,
     payload
 });
 
+
 export const fetchPhones = () => dispatch => {
     dispatch(fetchPhonesAttempt());
-    //...añadir código axios
-    // manejar success
-    // manejar fail
+    const phoneUrl = getPhoneUrl();
+
+    return axios.get(phoneUrl)
+        .then(response => dispatch(fetchPhonesSuccess(response.data)))
+        .catch(err => dispatch(fetchPhonesFail(err)));
 };

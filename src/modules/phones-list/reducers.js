@@ -40,7 +40,7 @@ const error = (state = initialState.error, {type, payload}) => {
 const data = (state = initialState.data, {type, payload}) => {
     switch(type) {
         case FETCH_SUCCEEDED:
-            return payload.data;
+            return payload.phones;
         default:
             return state;
     }

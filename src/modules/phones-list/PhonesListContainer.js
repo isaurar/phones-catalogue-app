@@ -1,18 +1,25 @@
-import React from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import * as actions from './actions';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
+import {fetchPhones} from './actions';
 
-const PhonesListContainer = props => {
-    console.log('props', props);
+const PhonesListContainer = () => {
+    const phones = useSelector(({phones}) => phones);
+    const {search} = useLocation();
+    const params = new URLSearchParams(search);
+    const limit = params.get('limit');
+    const page = params.get('page');
+    //TODO: move to custom hook
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchPhones());
+    }, [search, dispatch]);
+    console.log(phones);
     return (
-        <div>Phones List Container</div>
+        <div>
+            <h2>Phones List Container (offset: {limit}; page: {page})</h2>
+        </div>
     );
 };
 
-const mapStateToProps = ({phones}) => phones || {};
-const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(actions, dispatch)
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(PhonesListContainer);
+export default PhonesListContainer;

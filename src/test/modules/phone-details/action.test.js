@@ -10,35 +10,37 @@ describe('actions for phone details', () => {
     const phoneId = '1';
     const dispatch = jest.fn();
     afterEach(() => dispatch.mockRestore());
-  
-  test('should create an action to fetch phone details attempt ', async () => {
-    const expectedAction = {
-      type: actionTypes.FETCH_ATTEMPTED, payload: undefined
-    };
-    axios.get.mockImplementationOnce(() => Promise.resolve({}));
-    await actions.fetchPhoneDetails(phoneId)(dispatch);
-    expect(dispatch).toHaveBeenNthCalledWith(1, expectedAction);
-  });
 
-  test('should create an action to fetch phone details success', async () => {    
-    const payload = PhonesAPI.getPhone(phoneId);
-    const expectedAction = {
-       type: actionTypes.FETCH_SUCCEEDED, payload,
-    };
-    axios.get.mockImplementationOnce(() => Promise.resolve({data: payload}));
-    
+    const checkActionIsCalled = (numberCalled, expectedActions) => expect(dispatch).toHaveBeenNthCalledWith(numberCalled, expectedActions);
+
+    const checkFetchPhoneDetailsActions = async ({ actionName, payload = undefined, isPromiseResolve, apiResponse = {}, numberCalled = 1 }) => {
+      const expectedAction = {
+        type: actionName, payload
+      };
+      axios.get.mockImplementationOnce(() => isPromiseResolve ? Promise.resolve(apiResponse) :  Promise.reject(apiResponse));
       await actions.fetchPhoneDetails(phoneId)(dispatch);
-      expect(dispatch).toHaveBeenNthCalledWith(2, expectedAction);
-  });
- 
-  test('should create an action to fetch phone details failes', async () => {
-    const payload = "error message";
-    const expectedAction = {
-      type: actionTypes.FETCH_FAILED, payload,
+      checkActionIsCalled(numberCalled, expectedAction);      
     };
-    axios.get.mockImplementation(() => Promise.reject(payload));
     
-    await actions.fetchPhoneDetails(phoneId)(dispatch);
-    expect(dispatch).toHaveBeenNthCalledWith(2, expectedAction);
-  });
+    test('should create an action to fetch phone details attempt', async () => {    
+      const expectedAction = { type: actionTypes.FETCH_ATTEMPTED, payload: undefined };
+      checkFetchPhoneDetailsActions({ actionName: actionTypes.FETCH_ATTEMPTED, expectedAction, isPromiseResolve: true }); 
+    });
+
+    test('should create an action to fetch phone details success', async () => {    
+      const payload = PhonesAPI.getPhone(phoneId);
+      const expectedAction = {
+        type: actionTypes.FETCH_SUCCEEDED, payload,
+      };
+      const apiResponse = {data: payload};
+      checkFetchPhoneDetailsActions({ actionName: actionTypes.FETCH_SUCCEEDED, apiResponse, expectedAction, isPromiseResolve: true, numberCalled: 2, payload}); 
+    });
+
+    test('should create an action to fetch phone details failes', async () => {
+      const payload = "error message";
+      const expectedAction = {
+        type: actionTypes.FETCH_FAILED, payload,
+      };
+      checkFetchPhoneDetailsActions({ actionName: actionTypes.FETCH_FAILED, apiResponse: payload, expectedAction, numberCalled: 2, payload}); 
+    });
 });

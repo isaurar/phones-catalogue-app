@@ -9,7 +9,7 @@ jest.mock('axios');
 describe('actions for list phones', () => {
     const page = 1;
     const dispatch = jest.fn();
-    afterEach(() => dispatch.mockRestore());
+    afterEach(() => dispatch.mockRestore());    
   
   test('should create an action to fetch phones attempt ', async () => {
     const expectedAction = {

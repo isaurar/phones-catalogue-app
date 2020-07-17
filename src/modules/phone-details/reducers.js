@@ -9,7 +9,6 @@ import {
 const initialState = {
     error: null,
     data: null,
-    metadata: null,
     isFetching: false
 };
 

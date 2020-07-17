@@ -22,9 +22,9 @@ const fetchPhoneDetailsFail = payload => ({
 });
 
 
-export const fetchPhoneDetails = id => dispatch => {
+export const fetchPhoneDetails = phoneId => dispatch => {
     dispatch(fetchPhoneDetailsAttempt());
-    const phoneUrl = getPhoneUrl({id});
+    const phoneUrl = getPhoneUrl({phoneId});
     return axios.get(phoneUrl)
         .then(response => dispatch(fetchPhoneDetailsSuccess(response.data)))
         .catch(err => dispatch(fetchPhoneDetailsFail(err)));

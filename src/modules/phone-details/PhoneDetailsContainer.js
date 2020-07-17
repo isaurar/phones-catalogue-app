@@ -15,8 +15,8 @@ import {
 const PhoneDetailsContainer = () => {
     const history = useHistory();
     const { id } = useParams();
-    const { data = {}, isFetching } = useSelector(({ phoneDetails }) => phoneDetails);
-    const { title, image, brand, technology, announced, dimensions } = data;
+    const { data, isFetching } = useSelector(({ phoneDetails }) => phoneDetails);
+    const { title, image, brand, technology, announced, dimensions } = data || {};
     const description = Object.entries({ brand, technology, announced, dimensions });
     const dispatch = useDispatch();
     useEffect(() => {

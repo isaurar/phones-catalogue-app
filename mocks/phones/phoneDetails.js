@@ -1,4 +1,4 @@
-const data = require('./fixtures.js');
+const data = require('./phonesfixtures.js');
 
 module.exports = app => app.get('/api/phones/:id', (req, res) => {
     const {id: requestId} = req.params;

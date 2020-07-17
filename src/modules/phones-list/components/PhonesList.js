@@ -4,21 +4,30 @@ import {
     List,
     ListItem,
     ListItemIcon,
+    ListItemText,
     Divider
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import IconAndroidPhone from '@material-ui/icons/PhoneAndroid';
 import {useHistory} from 'react-router-dom';
 
+const useStyles = makeStyles({
+    listItem: {
+        padding: '1rem'
+    }
+});
+
 const PhonesList = ({data}) => {
     const history = useHistory();
+    const classes = useStyles();
     return data ? <div>
         <List dense>
             {data.map(({id, title}, i) => <Fragment  key={i}>
-                <ListItem onClick={() => history.push(`/phone-details/${id}`)}>
+                <ListItem button className={classes.listItem} onClick={() => history.push(`/phone-details/${id}`)}>
                     <ListItemIcon>
                         <IconAndroidPhone />
                     </ListItemIcon>
-                        #{id} {title}
+                    <ListItemText primary={`${title}`} />
                 </ListItem>
                 <Divider />
             </Fragment>)}

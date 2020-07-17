@@ -1,4 +1,4 @@
-const data = require('./fixtures.js');
+const data = require('./phonesFixtures.js');
 
 module.exports = app => app.get('/api/phones', function(request, response) {
     const {query: { page, limit }} = request;

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Application should render the phone catalogue 1`] = `
+<div
+  className="MuiContainer-root MuiContainer-fixed MuiContainer-maxWidthLg"
+>
+  <header
+    className="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appBar-1 mui-fixed MuiPaper-elevation4"
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-h6"
+    >
+      Phones Catalogue
+    </h6>
+  </header>
+  <div
+    className="makeStyles-topBarSeparator-2"
+  />
+</div>
+`;

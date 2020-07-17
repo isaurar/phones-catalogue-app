@@ -23,24 +23,17 @@ describe('actions for phone details', () => {
     };
     
     test('should create an action to fetch phone details attempt', async () => {    
-      const expectedAction = { type: actionTypes.FETCH_ATTEMPTED, payload: undefined };
-      checkFetchPhoneDetailsActions({ actionName: actionTypes.FETCH_ATTEMPTED, expectedAction, isPromiseResolve: true }); 
+      checkFetchPhoneDetailsActions({ actionName: actionTypes.FETCH_ATTEMPTED, isPromiseResolve: true }); 
     });
 
     test('should create an action to fetch phone details success', async () => {    
       const payload = PhonesAPI.getPhone(phoneId);
-      const expectedAction = {
-        type: actionTypes.FETCH_SUCCEEDED, payload,
-      };
       const apiResponse = {data: payload};
-      checkFetchPhoneDetailsActions({ actionName: actionTypes.FETCH_SUCCEEDED, apiResponse, expectedAction, isPromiseResolve: true, numberCalled: 2, payload}); 
+      checkFetchPhoneDetailsActions({ actionName: actionTypes.FETCH_SUCCEEDED, apiResponse, isPromiseResolve: true, numberCalled: 2, payload}); 
     });
 
     test('should create an action to fetch phone details failes', async () => {
       const payload = "error message";
-      const expectedAction = {
-        type: actionTypes.FETCH_FAILED, payload,
-      };
-      checkFetchPhoneDetailsActions({ actionName: actionTypes.FETCH_FAILED, apiResponse: payload, expectedAction, numberCalled: 2, payload}); 
+      checkFetchPhoneDetailsActions({ actionName: actionTypes.FETCH_FAILED, apiResponse: payload, numberCalled: 2, payload}); 
     });
 });
